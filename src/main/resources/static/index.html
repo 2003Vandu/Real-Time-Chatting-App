@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Modern Chat • Real-time Messaging</title>
+</head>
+<body>
+
+<h2>✨ One-to-One Chat ✨</h2>
+<h2>  Anonymous chatting </h2>
+
+<div class="user-form" id="username-page">
+    <h2>Welcome</h2>
+    <form id="usernameForm">
+        <label for="nickname">🏷️ Nickname</label>
+        <input type="text" id="nickname" name="nickname" placeholder="Enter your nickname" required autocomplete="off">
+
+        <label for="fullname">👤 Full Name</label>
+        <input type="text" id="fullname" name="realname" placeholder="Enter your full name" required autocomplete="off">
+
+        <button type="submit">
+            <span>Join Chat</span>
+        </button>
+    </form>
+</div>
+
+<div class="chat-container hidden" id="chat-page">
+    <div class="users-list">
+        <div class="users-list-container">
+            <h2>💬 Online Users</h2>
+            <ul id="connectedUsers">
+                <!-- Users will be dynamically added here -->
+            </ul>
+        </div>
+        <div>
+            <p id="connected-user-fullname">👋 Guest</p>
+            <a class="logout" href="javascript:void(0)" id="logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="chat-area">
+        <div id="chat-messages">
+            <div class="empty-state">
+                <p>Select a user to start chatting</p>
+            </div>
+        </div>
+
+        <form id="messageForm" name="messageForm" class="hidden">
+            <div class="message-input">
+                <input autocomplete="off" type="text" id="message" placeholder="Type your message...">
+                <button type="submit">
+                    <span>Send</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>
