@@ -81,3 +81,108 @@ Using Gradle
 
 
 The Spring Boot application will start and listen on the configured port (default is 8080).
+📡 Socket.IO Connection Details
+
+The Socket.IO server is hosted by the Spring Boot application.
+
+Detail
+
+Value
+
+Server URL
+
+http://localhost:8080 (or your deployment URL)
+
+Connection Path
+
+Varies based on configuration. Often handled automatically by the client library.
+
+Key Socket Events (Client/Server Communication)
+
+Event Name
+
+Direction
+
+Description
+
+Payload Example
+
+message:send
+
+Client -> Server
+
+Used by the client to send a new chat message.
+
+{ content: "Hello, world!", senderId: "anon-123" }
+
+message:new
+
+Server -> All Clients
+
+Broadcasts a new message to all connected users in real-time.
+
+{ id: "msg-42", content: "...", senderId: "...", timestamp: "..." }
+
+user:join
+
+Client -> Server
+
+Sent when a user successfully connects to request an anonymous ID.
+
+None
+
+user:assigned
+
+Server -> Client
+
+Assigns a unique anonymous ID to the new user.
+
+{ userId: "anon-123" }
+
+chat:history
+
+Server -> Client
+
+Sends the recent message history upon initial connection.
+
+[{ id: "...", content: "...", ... }]
+
+🧑‍💻 Usage (Frontend Client)
+
+To interact with the application, you need a separate frontend client (e.g., an HTML/JS page or a framework-based application) that connects using the Socket.IO client library.
+
+Connect the Socket.IO client to the backend URL (http://localhost:8080).
+
+The client should immediately emit a user:join event.
+
+Wait for the server to respond with the user:assigned event containing the userId.
+
+The server will also send the initial chat:history via the appropriate event.
+
+Use the assigned userId to send messages using the message:send event.
+
+🛑 Project Structure (Backend)
+
+The main components of the Spring Boot application are likely structured as follows:
+
+controller/
+
+ChatController.java: Handles HTTP requests (e.g., health check).
+
+socket/
+
+SocketIoModule.java: Configures the Socket.IO server and listener endpoints.
+
+model/
+
+ChatMessage.java: MongoDB document model for messages.
+
+User.java: Simple model for an anonymous user session.
+
+repository/
+
+ChatMessageRepository.java: Spring Data MongoDB repository for CRUD operations.
+
+service/
+
+ChatService.java: Business logic for saving, retrieving, and broadcasting messages.
