@@ -4,6 +4,10 @@
 
 This project is a multi-user, real-time chat application designed to facilitate anonymous conversations. It uses a robust Spring Boot backend integrated with Socket.IO for low-latency communication and MongoDB for persistent message storage
 
+# Demo
+
+https://github.com/user-attachments/assets/ab1abf49-d929-4172-b840-e591250c060c
+
 ✨ Features
 
 Real-Time Messaging: Instantaneous message delivery using Socket.IO (WebSocket).
