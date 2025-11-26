@@ -15,41 +15,13 @@ Robust Backend: Built with Spring Boot, providing stability and easy deployment.
 
 🛠️ Tech Stack
 
-Component
-
-Technology
-
-Description
-
-Backend Framework
-
-Spring Boot (Java)
-
-Simplifies Java application development and provides a RESTful foundation.
-
-Real-Time Layer
-
-Socket.IO (Server)
-
-Enables reliable, bi-directional, and event-based communication.
-
-Database
-
-MongoDB
-
-NoSQL document database for flexible storage of chat messages and user state.
-
-Build Tool
-
-Maven / Gradle (Specify which one you use)
-
-Dependency management and build automation.
-
-Client
-
-Vanilla HTML, CSS, JS
-
-The client-side application connects via the Socket.IO client library and is served from the Spring Boot static folder.
+| Component | Technology | Description |
+|---|---|---|
+| Backend Framework | Spring Boot (Java) | Simplifies Java application development and provides a RESTful foundation. |
+| Real-Time Layer | Socket.IO (Server) | Enables reliable, bi-directional, and event-based communication. |
+| Database | MongoDB | NoSQL document database for flexible storage of chat messages and user state. |
+| Build Tool | Gradle | Dependency management and build automation. |
+| Client | Vanilla HTML, CSS, JS | The client-side application connects via the Socket.IO client library and is served from the Spring Boot static folder. |
 
 ⚙️ Prerequisites
 
