@@ -1,5 +1,6 @@
-**Real-Time Anonymous Chat Application
-*This project is a multi-user, real-time chat application designed to facilitate anonymous conversations. It uses a robust Spring Boot backend integrated with Socket.IO for low-latency communication and MongoDB for persistent message storage
+                              Real-Time Anonymous Chat Application
+
+This project is a multi-user, real-time chat application designed to facilitate anonymous conversations. It uses a robust Spring Boot backend integrated with Socket.IO for low-latency communication and MongoDB for persistent message storage
 
 ✨ Features
 
@@ -27,57 +28,55 @@ Robust Backend: Built with Spring Boot, providing stability and easy deployment.
 
 Before running the application, ensure you have the following installed:
 
-Java Development Kit (JDK): Version 17 or later.
+    Java Development Kit (JDK): Version 17 or later.
 
-Maven or Gradle: [Replace this with your chosen build tool (e.g., Maven) in your final version.]
+    Maven or Gradle: [Replace this with your chosen build tool (e.g., Maven) in your final version.]
 
-Node.js & npm: Recommended for managing client-side dependencies (like the Socket.IO client library), though the client runs purely in the browser as a static HTML/JS page.
+    Node.js & npm: Recommended for managing client-side dependencies (like the Socket.IO client library), though the client runs purely in the browser as a static HTML/JS page.
 
-MongoDB Instance: A running instance of MongoDB (local or cloud-hosted).
+    MongoDB Instance: A running instance of MongoDB (local or cloud-hosted).
 🚀 Getting Started (Backend)
 
 Follow these steps to get your Spring Boot Socket.IO server up and running.
 
-1. Clone the Repository
+    1. Clone the Repository
 
-git clone [YOUR_REPOSITORY_URL]
-cd [project-folder-name]
+    git clone [YOUR_REPOSITORY_URL]
+    cd [project-folder-name]
 
+    2. Configure MongoDB
 
+    Update the src/main/resources/application.properties (or application.yml) file with your MongoDB connection details.
 
-2. Configure MongoDB
-
-Update the src/main/resources/application.properties (or application.yml) file with your MongoDB connection details.
-
-Example application.properties configuration:
+    Example application.properties configuration:
 
 # Server configuration
-server.port=8080
+    server.port=8080
 
 # MongoDB Configuration
-spring.data.mongodb.host=localhost
-spring.data.mongodb.port=27017
-spring.data.mongodb.database=realtime-chat-db
-# spring.data.mongodb.uri=mongodb://username:password@host:port/database # Use this for auth
+    spring.data.mongodb.host=localhost
+    spring.data.mongodb.port=27017
+    spring.data.mongodb.database=realtime-chat-db
+    # spring.data.mongodb.uri=mongodb://username:password@host:port/database # Use this for auth
 
 (Note: Ensure your MongoDB instance is running and accessible.)
 
 3. Build and Run the Application
 
-Using Maven
+    Using Maven
 
 # Package the application
-mvn clean package
+    mvn clean package
 
-# Run the JAR file (replace 'app.jar' with the actual filename)
-java -jar target/app.jar
+    # Run the JAR file (replace 'app.jar' with the actual filename)
+    java -jar target/app.jar
 
 
 
 Using Gradle
 
-# Run the application directly (assuming Gradle wrapper is used)
-./gradlew bootRun
+    # Run the application directly (assuming Gradle wrapper is used)
+    ./gradlew bootRun
 
 
 The Spring Boot application will start and listen on the configured port (default is 8080).
@@ -85,67 +84,21 @@ The Spring Boot application will start and listen on the configured port (defaul
 
 The Socket.IO server is hosted by the Spring Boot application.
 
-Detail
+    Detail               Value
 
-Value
-
-Server URL
-
-http://localhost:8080 (or your deployment URL)
-
-Connection Path
+    Server URL           http://localhost:8080 (or your deployment URL)
+    Connection Path      Varies based on configuration. Often handled automatically by the client library.
 
 Varies based on configuration. Often handled automatically by the client library.
 
 Key Socket Events (Client/Server Communication)
-
-Event Name
-
-Direction
-
-Description
-
-Payload Example
-
-message:send
-
-Client -> Server
-
-Used by the client to send a new chat message.
-
-{ content: "Hello, world!", senderId: "anon-123" }
-
-message:new
-
-Server -> All Clients
-
-Broadcasts a new message to all connected users in real-time.
-
-{ id: "msg-42", content: "...", senderId: "...", timestamp: "..." }
-
-user:join
-
-Client -> Server
-
-Sent when a user successfully connects to request an anonymous ID.
-
-None
-
-user:assigned
-
-Server -> Client
-
-Assigns a unique anonymous ID to the new user.
-
-{ userId: "anon-123" }
-
-chat:history
-
-Server -> Client
-
-Sends the recent message history upon initial connection.
-
-[{ id: "...", content: "...", ... }]
+| Event Name      | Direction         | Description                                      | Payload Example                                  |
+|-----------------|-------------------|--------------------------------------------------|--------------------------------------------------|
+| message:send    | Client → Server   | Used by the client to send a new chat message.   | `{ content: "Hello, world!", senderId: "anon-123" }` |
+| message:new     | Server → All Clients | Broadcasts a new message to all connected users in real-time. | `{ id: "msg-42", content: "...", senderId: "...", timestamp: "..." }` |
+| user:join       | Client → Server   | Sent when a user successfully connects to request an anonymous ID. | `None` |
+| user:assigned   | Server → Client   | Assigns a unique anonymous ID to the new user.   | `{ userId: "anon-123" }`                         |
+| chat:history    | Server → Client   | Sends the recent message history upon initial connection. | `[{ id: "...", content: "...", ... }]`           |
 
 🧑‍💻 Usage (Frontend Client)
 
@@ -165,24 +118,24 @@ Use the assigned userId to send messages using the message:send event.
 
 The main components of the Spring Boot application are likely structured as follows:
 
-controller/
+    controller/
 
 ChatController.java: Handles HTTP requests (e.g., health check).
 
-socket/
+    socket/
 
 SocketIoModule.java: Configures the Socket.IO server and listener endpoints.
 
-model/
+    model/
 
 ChatMessage.java: MongoDB document model for messages.
 
 User.java: Simple model for an anonymous user session.
 
-repository/
+    repository/
 
 ChatMessageRepository.java: Spring Data MongoDB repository for CRUD operations.
 
-service/
+    service/
 
 ChatService.java: Business logic for saving, retrieving, and broadcasting messages.
