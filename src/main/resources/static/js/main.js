@@ -219,7 +219,7 @@ function connect(event) {
         chatPage.classList.remove('hidden');
 
         // ✅ Use BASE_URL for WebSocket
-        const socket = new SockJS(`${BASE_URL}/ws`);
+        const socket = new SockJS('/ws');
         stompClient = Stomp.over(socket);
         stompClient.connect({}, onConnected, onError);
     }
