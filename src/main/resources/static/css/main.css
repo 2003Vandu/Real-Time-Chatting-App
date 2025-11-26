@@ -508,6 +508,15 @@ a.logout::before {
 .message-input button:active {
     transform: translateY(0);
 }
+.message.sender,
+.message.receiver {
+    background-color: #2196F3; /* blue */
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    margin: 4px 0;
+}
+
 
 /* --- User Form (Login Page) --- */
 .user-form {

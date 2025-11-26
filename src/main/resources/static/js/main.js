@@ -300,8 +300,9 @@ function userItemClick(event) {
 }
 
 function displayMessage(senderId, content) {
-    const messageContainer = document.createElement('div');
-    messageContainer.classList.add('message');
+   const messageContainer = document.createElement('div');
+   messageContainer.classList.add('message', 'blue-message'); // ✅ always blue
+
     if (senderId === nickname) {
         messageContainer.classList.add('sender');
     } else {
