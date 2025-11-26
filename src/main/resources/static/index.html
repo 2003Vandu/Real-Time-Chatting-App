@@ -12,7 +12,10 @@
 <body>
 
 <h2>✨ One-to-One Chat ✨</h2>
-<h2>  Anonymous chatting </h2>
+<h2>Anonymous chatting</h2>
+
+<!-- Added connecting element so JS onError() works -->
+<div class="connecting"></div>
 
 <div class="user-form" id="username-page">
     <h2>Welcome</h2>
@@ -61,8 +64,11 @@
     </div>
 </div>
 
+<!-- SockJS + STOMP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+<!-- Ensure main.js is served from /js/main.js -->
 <script src="/js/main.js"></script>
 </body>
 </html>
