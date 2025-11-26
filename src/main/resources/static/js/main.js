@@ -238,9 +238,13 @@ function onConnected() {
 }
 
 async function findAndDisplayConnectedUsers() {
-    // ❌ fetch('/users') only works locally
-    const connectedUsersResponse = await fetch('https://real-time-chatting-app-production-3b7b.up.railway.app/users');
-    // ✅ use full Railway domain so frontend can reach backend REST endpoint
+    // Detect environment: localhost vs Railway
+    const BASE_URL = window.location.hostname === "localhost"
+        ? "http://localhost:8080"
+        : "https://real-time-chatting-app-production-3b7b.up.railway.app";
+
+    // Then use it in fetch calls
+    const connectedUsersResponse = await fetch(`${BASE_URL}/users`);
 
     let connectedUsers = await connectedUsersResponse.json();
     connectedUsers = connectedUsers.filter(user => user.nickName !== nickname);

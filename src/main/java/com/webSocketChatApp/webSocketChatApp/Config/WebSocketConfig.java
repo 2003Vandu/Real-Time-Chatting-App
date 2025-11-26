@@ -28,6 +28,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")
+                .setAllowedOrigins("https://real-time-chatting-app-production-3b7b.up.railway.app")// for railway backend connection
                 .withSockJS();
     }
 
