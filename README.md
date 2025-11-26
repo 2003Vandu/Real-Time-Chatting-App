@@ -1,4 +1,4 @@
-Real-Time Anonymous Chat Application
+**Real-Time Anonymous Chat Application
 *This project is a multi-user, real-time chat application designed to facilitate anonymous conversations. It uses a robust Spring Boot backend integrated with Socket.IO for low-latency communication and MongoDB for persistent message storage
 
 ✨ Features
