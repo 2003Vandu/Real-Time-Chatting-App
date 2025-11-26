@@ -315,7 +315,7 @@ function displayMessage(senderId, content) {
 
 async function fetchAndDisplayUserChat() {
     // ✅ Use BASE_URL for messages
-    const userChatResponse = await fetch(`${BASE_URL}/messages/${nickname}/${selectedUserId}`);
+    const userChatResponse = await fetch('/messages/nickname/selectedUserId');
     const userChat = await userChatResponse.json();
 
     chatArea.innerHTML = '';
