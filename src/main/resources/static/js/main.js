@@ -240,7 +240,7 @@ function onConnected() {
 }
 
 async function findAndDisplayConnectedUsers() {
-    const connectedUsersResponse = await fetch(`${BASE_URL}/users`);
+    const connectedUsersResponse = await fetch('/users');
     let connectedUsers = await connectedUsersResponse.json();
 
     connectedUsers = connectedUsers.filter(user => user.nickName !== nickname);
