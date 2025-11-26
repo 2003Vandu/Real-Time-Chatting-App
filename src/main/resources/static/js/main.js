@@ -205,10 +205,10 @@ let nickname = null;
 let fullname = null;
 let selectedUserId = null;
 
-// Detect environment: localhost vs Railway
-    const BASE_URL = window.location.hostname === "localhost"
-        ? "http://localhost:8080"
-        : "https://real-time-chatting-app-production-3b7b.up.railway.app";
+// ✅ Detect environment: localhost vs Railway
+const BASE_URL = window.location.hostname === "localhost"
+    ? "http://localhost:8080"
+    : "https://real-time-chatting-app-production-3b7b.up.railway.app";
 
 function connect(event) {
     nickname = document.querySelector('#nickname').value.trim();
@@ -218,10 +218,8 @@ function connect(event) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
-        /*const socket = new SockJS('/ws');*/
         // ✅ Use BASE_URL for WebSocket
         const socket = new SockJS(`${BASE_URL}/ws`);
-
         stompClient = Stomp.over(socket);
         stompClient.connect({}, onConnected, onError);
     }
@@ -242,12 +240,9 @@ function onConnected() {
 }
 
 async function findAndDisplayConnectedUsers() {
-
-
-    // Then use it in fetch calls
     const connectedUsersResponse = await fetch(`${BASE_URL}/users`);
-
     let connectedUsers = await connectedUsersResponse.json();
+
     connectedUsers = connectedUsers.filter(user => user.nickName !== nickname);
     const connectedUsersList = document.getElementById('connectedUsers');
     connectedUsersList.innerHTML = '';
@@ -319,11 +314,10 @@ function displayMessage(senderId, content) {
 }
 
 async function fetchAndDisplayUserChat() {
-    // ❌ relative path fails in Railway
-    const userChatResponse = await fetch(`https://real-time-chatting-app-production-3b7b.up.railway.app/messages/${nickname}/${selectedUserId}`);
-    // ✅ full Railway domain for REST endpoint
-
+    // ✅ Use BASE_URL for messages
+    const userChatResponse = await fetch(`${BASE_URL}/messages/${nickname}/${selectedUserId}`);
     const userChat = await userChatResponse.json();
+
     chatArea.innerHTML = '';
     userChat.forEach(chat => {
         displayMessage(chat.senderId, chat.content);
@@ -332,8 +326,6 @@ async function fetchAndDisplayUserChat() {
 }
 
 function onError() {
-    // ❌ will throw if `.connecting` element missing
-    // ✅ ensure <div class="connecting"></div> exists in HTML
     connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
     connectingElement.style.color = 'red';
 }
@@ -386,7 +378,7 @@ function onLogout() {
     window.location.reload();
 }
 
-usernameForm.addEventListener('submit', connect, true); // step 1
+usernameForm.addEventListener('submit', connect, true);
 messageForm.addEventListener('submit', sendMessage, true);
 logout.addEventListener('click', onLogout, true);
 window.onbeforeunload = () => onLogout();
