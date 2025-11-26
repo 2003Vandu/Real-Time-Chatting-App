@@ -205,6 +205,11 @@ let nickname = null;
 let fullname = null;
 let selectedUserId = null;
 
+// Detect environment: localhost vs Railway
+    const BASE_URL = window.location.hostname === "localhost"
+        ? "http://localhost:8080"
+        : "https://real-time-chatting-app-production-3b7b.up.railway.app";
+
 function connect(event) {
     nickname = document.querySelector('#nickname').value.trim();
     fullname = document.querySelector('#fullname').value.trim();
@@ -214,9 +219,8 @@ function connect(event) {
         chatPage.classList.remove('hidden');
 
         /*const socket = new SockJS('/ws');*/
-        // ❌ local-only path, fails in Railway
-        const socket = new SockJS('https://real-time-chatting-app-production-3b7b.up.railway.app/ws');
-        // ✅ use full Railway domain so WebSocket connects in production
+        // ✅ Use BASE_URL for WebSocket
+        const socket = new SockJS(`${BASE_URL}/ws`);
 
         stompClient = Stomp.over(socket);
         stompClient.connect({}, onConnected, onError);
@@ -238,10 +242,7 @@ function onConnected() {
 }
 
 async function findAndDisplayConnectedUsers() {
-    // Detect environment: localhost vs Railway
-    const BASE_URL = window.location.hostname === "localhost"
-        ? "http://localhost:8080"
-        : "https://real-time-chatting-app-production-3b7b.up.railway.app";
+
 
     // Then use it in fetch calls
     const connectedUsersResponse = await fetch(`${BASE_URL}/users`);
