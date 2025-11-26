@@ -34,3 +34,50 @@ Maven or Gradle: [Replace this with your chosen build tool (e.g., Maven) in your
 Node.js & npm: Recommended for managing client-side dependencies (like the Socket.IO client library), though the client runs purely in the browser as a static HTML/JS page.
 
 MongoDB Instance: A running instance of MongoDB (local or cloud-hosted).
+🚀 Getting Started (Backend)
+
+Follow these steps to get your Spring Boot Socket.IO server up and running.
+
+1. Clone the Repository
+
+git clone [YOUR_REPOSITORY_URL]
+cd [project-folder-name]
+
+
+
+2. Configure MongoDB
+
+Update the src/main/resources/application.properties (or application.yml) file with your MongoDB connection details.
+
+Example application.properties configuration:
+
+# Server configuration
+server.port=8080
+
+# MongoDB Configuration
+spring.data.mongodb.host=localhost
+spring.data.mongodb.port=27017
+spring.data.mongodb.database=realtime-chat-db
+# spring.data.mongodb.uri=mongodb://username:password@host:port/database # Use this for auth
+
+(Note: Ensure your MongoDB instance is running and accessible.)
+
+3. Build and Run the Application
+
+Using Maven
+
+# Package the application
+mvn clean package
+
+# Run the JAR file (replace 'app.jar' with the actual filename)
+java -jar target/app.jar
+
+
+
+Using Gradle
+
+# Run the application directly (assuming Gradle wrapper is used)
+./gradlew bootRun
+
+
+The Spring Boot application will start and listen on the configured port (default is 8080).
